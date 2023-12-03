@@ -119,9 +119,11 @@ We will be working observations of birds from 2021 onward.
 
 ### Investigate the legacy of redlining in current environmental (in)justice
 
+##### Read in Libraries
 Before starting, we need to load any necessary packages in order to do our analysis and mapping
 
 ```{r }
+#read in libraries
 library(tidyverse)
 library(sf)
 library(tmap)
@@ -129,23 +131,22 @@ library(spData)
 library(gt)
 ```
 
-
-Here I will read in the data from
+##### Read in data
+Here I will read in the data by using a file path that makes sense in my directory. Make sure to change your file path that makes sense for your directory. I recommend using the function `getwd()` to see where your current working directory is at.
 ```{r }
-ejscreen <- st_read("data/EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb")
+#read in ejscreen data
+ejscreen <- st_read("../data/EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb")
 
-lac <- ejscreen %>% 
-  filter(CNTY_NAME == "Los Angeles County")
 ```
 
-Make a map of wastewater discharge by census block groups. Indicate
-which census block groups are above the 95th percentile of national
-values for wastewater discharge by adding a centroid. (10 points)
+##### Data analysis
+###### Wastewater Discharge
+Once we have read in the data successfully, we'll go ahead and create a map of the wastewater discharge by census block groups. We also want to indicate which census blocks groups are above the 95th percentile of national values for wasterwater discharge. This will be indicated by adding a centroid. In this notebook, the centroids are indicated by a red dot.
 
 ```{r }
-#REMEMBER COMPASS AND SCALE AND STUFF GRADICLES
-# ASK ABOUT WHY SCALE BAR WONT MOVE
-#ASK IF USING P_PWDIS OR PWDIS IS FOR WASTEWATER OF MAP (cause we are looking at it in percentile in the first place)
+#filter in ejscreen for Los Angeles County
+lac <- ejscreen %>% 
+  filter(CNTY_NAME == "Los Angeles County")
 
 #filter for data that does not include an NA value
 lac_simple_dis <- lac %>% filter(!is.na(P_PWDIS))
@@ -177,9 +178,11 @@ lac_simple_dis_map <- tm_shape(lac_simple_dis) + #create a map using the lac_sim
 #combine two maps together and print combined maps
 lac_simple_dis_map + lac_centroids_dis95_map
 ```
+Here, we see a map of the Los Angeles County showing the percentiles of wastewater discharge, with least discharge being light green and most discharge being dark green. The figure caption states that Block groups over the 95th percentile.
 
-Find the percent of census block groups that have:
-- less than 5% of the population is considered low income (5 points)
+
+###### Low Income Percentage
+We are also interested in the relationship between census block groups and population income. One relationship we will look into is the percentage of census block group have less than 5% of that group's population that is considered low income.
 
 ```{r }
 #finding low income percent that is less than 5 percent
@@ -192,8 +195,14 @@ lac_lowincpct <- lac %>% #piping from lac
   select(LOWINCPCT) #select for just LOWINCPCT in a new dataframe
 
 #divide the number of rows in lowincpct_5 by rows in lac_lowincpct and multiply by 100
-(nrow(lowincpct_5) / nrow(lac_lowincpct)) *100
+low_income_final <- (nrow(lowincpct_5) / nrow(lac_lowincpct)) *100
 ```
+
+Here we get a percentage of about `r paste(round(low_income_final, 2))`. One conclusion from this number is showing that there are many more census blocks that have a higher percentage of low income population. We can assume that there are a higher percentage of low income individuals that live in the Los Angeles County. Let's go ahead and look more into the data to see if these low income population are more likely to be found in a lower HOLC rank.
+
+
+###### Particulate Matter and Superfund proximity
+We looked at low income percentage in 
 
 Find the percent of census block groups that are:
 - above the 80th percentile for Particulate Matter 2.5 AND
