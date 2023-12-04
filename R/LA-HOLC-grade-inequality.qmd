@@ -202,11 +202,7 @@ Here we get a percentage of about `r paste(round(low_income_final, 2))`. One con
 
 
 ###### Particulate Matter and Superfund proximity
-We looked at low income percentage in 
-
-Find the percent of census block groups that are:
-- above the 80th percentile for Particulate Matter 2.5 AND
-- above the 80th percentile for Superfund proximity (10 points)
+We looked at low income percentage in different census block groups. Now let's look at the relationship between census block groups and the Particulate Matter as well as the Superfund proximity. We'll go ahead and look at which census block groups are above the 80th percentile for both of these.
 
 ```{r }
 #Filtering for particulate matter 2.5 and superfund proximity for above 80 percentile
@@ -214,19 +210,22 @@ lac_pm25_super_80 <- lac %>% #piping from lac
   filter(P_PM25 > 80 & P_PNPL > 80) #filter from P_PM25 and P_PNPL for above the 80 percentile
 
 #divide number of rows in lac_pm25_super_80 by number of rows in lac
-nrow(lac_pm25_super_80) / nrow(lac) * 100
+pm25_super_final <- nrow(lac_pm25_super_80) / nrow(lac) * 100
 ```
+From this, we can conclude that about `r paste(round(pm25_super_final, 2))` percent of census block groups live in areas that are in the 80th percentile for high PM 2.5 levels and in superfund proximity.
 
-Import redlining information for Los Angeles.
 
-```{r }
+##### Import redlining data for Los Angeles
+Now we're going to go ahead and read in the redlining data for Los Angeles county. Fortunately in this case, we can do ahead and read it in through the URL.
+
+```{r, include = FALSE}
 LA_redlining <- st_read("https://dsl.richmond.edu/panorama/redlining/static/downloads/geojson/CALosAngeles1939.geojson") %>%
   st_make_valid()
 
 ```
 
-Make a map of historical redlining boundaries, colored by HOLC grade. (5
-points)
+###### Creating LA county map with HOLC grade on top
+Now we want to visualize the redlining boundaries. Let's go ahead and do that by plotting a map of where these boundaries lie on Los Angeles County.
 
 ```{r }
 #print map that includes the historical redlining boundaries
@@ -246,10 +245,14 @@ tm_shape(LA_redlining) + #load LA_redlining data
 
 ```
 
-Find the number of census block groups that fall within areas with HOLC
-grades hint: make sure the CRS match (15 points)
+This map shows us the locations of where each HOLC grade lies in relation to Los Angeles county.
 
-```{r eval=TRUE}
+
+###### Census block groups in HOLC grade
+In order to get a concrete detail about this, we're going to ahead and find how many census block groups that fall within areas with HOLC grades.
+
+
+```{r eval=TRUE, include=FALSE}
 #check crs of Los Angeles County
 st_crs(lac)
 
@@ -262,6 +265,10 @@ redlining_lac_join <- st_intersection(lac, LA_redlining_crs_t)
 #print how many row there are in redlining_lac_join
 nrow(redlining_lac_join)
 ```
+
+
+###### Summarizing Redlining data
+
 
 Summarize current conditions based on EJScreen data within historical
 redlining categories using the mean of the following variables:
