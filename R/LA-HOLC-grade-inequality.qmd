@@ -262,7 +262,7 @@ LA_redlining_crs_t <- st_transform(LA_redlining, crs = st_crs(3857))
 #join the two datasets by only filtering for the census block group that are completely within the HOLC grades
 redlining_lac_join <- st_intersection(lac, LA_redlining_crs_t)
 
-#print how many row there are in redlining_lac_join
+#print how many row there are in redlining_lac_join (not right, find the right answer)
 nrow(redlining_lac_join)
 ```
 
