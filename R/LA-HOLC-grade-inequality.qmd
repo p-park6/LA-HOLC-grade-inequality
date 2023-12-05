@@ -262,20 +262,23 @@ LA_redlining_crs_t <- st_transform(LA_redlining, crs = st_crs(3857))
 #join the two datasets by only filtering for the census block group that are completely within the HOLC grades
 redlining_lac_join <- st_intersection(lac, LA_redlining_crs_t)
 
-#print how many row there are in redlining_lac_join (not right, find the right answer)
-nrow(redlining_lac_join)
+#print how many row there are in redlining_lac_join ##(not right, find the right answer)##
+holc_census <- nrow(redlining_lac_join)
+
+#print holc_census results
+print(holc_census)
 ```
+
+This tells us that  `r paste(holc_census)` of census block groups lie within HOLC grade areas
 
 
 ###### Summarizing Redlining data
+Let's go ahead and take a deeper dive into our HOLC dataset and look for the mean of the following variables:
 
-
-Summarize current conditions based on EJScreen data within historical
-redlining categories using the mean of the following variables:
--% low income.
+- % low income.
 - percentile for particulate Matter 2.5.
 - percentile for low life expectancy.
-- percentile for air toxics cancer risk (20 points)
+- percentile for air toxics cancer risk
 
 ```{r }
 #find the means of the four variables we are looking for
@@ -292,20 +295,16 @@ redlining_mean_summary <- redlining_lac_join %>% #piping from redlining_lac_join
 redlining_mean_summary
 ```
 
-Please write 2-3 sentences reflecting on these results. (5 points)
-**Answer**: Overall, those in the A HOLC grade have a better standard of living than those in the D HOLC grade. I can assume that for those that have larger income, they have access to better health care and live in a cleaner area verses those that have lower income.
+From our analysis, those in the A HOLC grade have a better standard of living than those in the D HOLC grade. Those that are in the A HOLC grade have a larger income pool, meaning they have access to better health care and live in a cleaner area verses those that have lower income.
 
 ### Investigate the legacy of redlining in biodiversity observations
 
-For bird observations from 2022 that fall within neighborhoods with HOLC
-grads, find the percent of observations within each redlining categories
-and plot results. hint: make sure that the bird observations have the
-same CRS as redlining data. (20 points) 
+Now, let's look at the data from a bit of a different lens. One factor that income plays in one's life is what recreations they can do. Let's go ahead and look at bird observations in each HOLC grade. Let's go ahead and look at bird observations from 2022. We're also going to find the percentage of observations within each redlining category and plot them in a bar graph.
 
 
 ```{r } 
 #read in bird data
-birds <- st_read("data/gbif-birds-LA") %>% filter(year == 2022)
+birds <- st_read("../data/gbif-birds-LA") %>% filter(year == 2022)
 
 #check the crs for LA_redlining
 st_crs(LA_redlining) 
@@ -331,7 +330,5 @@ ggplot(data = redlining_bird_summary, #use redlining_bird_summary data
   title = "Percentage of bird sighting by HOLC Grade") #change title
 ```
 
-
-Please write 2-3 sentences reflecting on these results. Are they
-surprising? If so, why? What are some potential implications? (5 points)
-**Answer**: I am surprised with the results I plotted, as HOLC Grade C and D have a higher percentage of bird sighting verses those in HOLC Grade A and B. I would have assumed the graph to have more bird sightings in HOLC Grade A and B rather than C and D. This could be that there are more resources found in C and D, such as humans throwing their trash away at the side of the street verses in a trash can. These birds would rather be around an area with constant food resources, which could be found in the C and D communities.
+**Final Analysis**
+I am surprised with the results I plotted, as HOLC Grade C and D have a higher percentage of bird sighting verses those in HOLC Grade A and B. I would have assumed the graph to have more bird sightings in HOLC Grade A and B rather than C and D. This could be that there are more resources found in C and D, such as humans throwing their trash away at the side of the street verses in a trash can. These birds would rather be around an area with constant food resources, which could be found in the C and D communities.
