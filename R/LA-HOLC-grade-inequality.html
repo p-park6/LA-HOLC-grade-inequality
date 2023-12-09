@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.335">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Patty Park">
+
+<title>Relationship between HOLC grade and income disparity in Los Angeles County</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="LA-HOLC-grade-inequality_files/libs/clipboard/clipboard.min.js"></script>
+<script src="LA-HOLC-grade-inequality_files/libs/quarto-html/quarto.js"></script>
+<script src="LA-HOLC-grade-inequality_files/libs/quarto-html/popper.min.js"></script>
+<script src="LA-HOLC-grade-inequality_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="LA-HOLC-grade-inequality_files/libs/quarto-html/anchor.min.js"></script>
+<link href="LA-HOLC-grade-inequality_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="LA-HOLC-grade-inequality_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="LA-HOLC-grade-inequality_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="LA-HOLC-grade-inequality_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="LA-HOLC-grade-inequality_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Relationship between HOLC grade and income disparity in Los Angeles County</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Patty Park </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Present-day environmental justice may reflect legacies of injustice in the past. The United States has a long history of racial segregation which is still visible. During the 1930’s the Home Owners’ Loan Corporation (HOLC), as part of the New Deal, rated neighborhoods based on their perceived safety for real estate investment. Their ranking system, (A (green), B (blue), C (yellow), D (red)) was then used to block access to loans for home ownership. Colloquially known as “redlining”, this practice has had widely-documented consequences not only for community wealth, but also health.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> Redlined neighborhoods have less greenery<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> and are hotter than other neighborhoods.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>Check out coverage by the <a href="https://www.nytimes.com/interactive/2020/08/24/climate/racism-redlining-cities-global-warming.html">New York Times</a>.</p>
+<p>A recent study found that redlining has not only affected the environments communities are exposed to, it has also shaped our observations of biodiversity.<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> Community or citizen science, whereby individuals share observations of species, is generating an enormous volume of data. Ellis-Soto and co-authors found that redlined neighborhoods remain the most undersampled areas across 195 US cities. This gap is highly concerning, because conservation decisions are made based on these data.</p>
+<p>Check out coverage by <a href="https://eos.org/articles/bird-biodiversity-reports-reflect-cities-redlined-past?utm_source=EosBuzz&amp;mkt_tok=OTg3LUlHVC01NzIAAAGOx3ckQPpeDY3QyFKdUnBSYqILj3qLrgb_Q2lasphwcF90xEzMgjZFUo3NHsw3caXDcZe6I8D8qdVsSRr3wzhb6LKAQRgNo8ffhjieEbDwMw">EOS</a>.</p>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data">Data</h3>
+<section id="ejscreen" class="level4">
+<h4 class="anchored" data-anchor-id="ejscreen">EJScreen</h4>
+<p>We will be working with data from the United States Environmental Protection Agency’s EJScreen: Environmental Justice Screening and Mapping Tool.</p>
+<p>According to the <a href="https://www.epa.gov/ejscreen/purposes-and-uses-ejscreen">US EPA website</a>:</p>
+<blockquote class="blockquote">
+<p>This screening tool and data may be of interest to community residents or other stakeholders as they search for environmental or demographic information. It can also support a wide range of research and policy goals. The public has used EJScreen in many different locations and in many different ways.</p>
+<p>EPA is sharing EJScreen with the public: - to be more transparent about how we consider environmental justice in our work, - to assist our stakeholders in making informed decisions about pursuing environmental justice and, - to create a common starting point between the agency and the public when looking at issues related to environmental justice.</p>
+</blockquote>
+<p>EJScreen provides on environmental and demographic information for the US at the Census <a href="https://en.wikipedia.org/wiki/Census_tract">tract</a> and <a href="https://en.wikipedia.org/wiki/Census_block_group">block group</a> levels. You will be working with block group data that has been downloaded from the <a href="https://www.epa.gov/ejscreen/download-ejscreen-data">EPA site</a>. To understand the associated data columns, you will need to explore the Technical Documentation and column description spreadsheet available in the data folder. I also encourage you to explore the <a href="https://www.epa.gov/ejscreen/limitations-and-caveats-using-ejscreen">limitations and caveats</a> of the data.</p>
+</section>
+<section id="mapping-inequality" class="level4">
+<h4 class="anchored" data-anchor-id="mapping-inequality">Mapping Inequality</h4>
+<p>A team of researchers, led by the <a href="https://dsl.richmond.edu/">Digital Scholarship Lab</a> at the University of Richmond have digitized maps and information from the HOLC as part of the <a href="https://dsl.richmond.edu/panorama/redlining/#loc=5/39.1/-94.58">Mapping Inequality</a> project.</p>
+<p>We will be working with maps of HOLC grade designations for Los Angeles. Information on the data can be found <a href="https://dsl.richmond.edu/panorama/redlining/#loc=5/39.1/-94.58&amp;text=downloads">here</a>.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+</section>
+<section id="biodiversity-observations" class="level4">
+<h4 class="anchored" data-anchor-id="biodiversity-observations">Biodiversity observations</h4>
+<p>The <a href="gbif.org">Global Biodiversity Information Facility</a> is the largest aggregator of biodiversity observations in the world. Observations typically include a location and date that a species was observed.</p>
+<p>We will be working observations of birds from 2021 onward.</p>
+</section>
+</section>
+<section id="investigate-the-legacy-of-redlining-in-current-environmental-injustice" class="level3">
+<h3 class="anchored" data-anchor-id="investigate-the-legacy-of-redlining-in-current-environmental-injustice">Investigate the legacy of redlining in current environmental (in)justice</h3>
+<section id="read-in-libraries" class="level5">
+<h5 class="anchored" data-anchor-id="read-in-libraries">Read in Libraries</h5>
+<p>Before starting, we need to load any necessary packages in order to do our analysis and mapping</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#read in libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sf)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tmap)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(spData)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="read-in-data" class="level5">
+<h5 class="anchored" data-anchor-id="read-in-data">Read in data</h5>
+<p>Here I will read in the data by using a file path that makes sense in my directory. Make sure to change your file path that makes sense for your directory. I recommend using the function <code>getwd()</code> to see where your current working directory is at.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#read in ejscreen data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>ejscreen <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"../data/EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `EJSCREEN_StatePctiles_with_AS_CNMI_GU_VI' from data source 
+  `/Users/p_park/eds_223/final-project/LA-HOLC-grade-inequality/data/EJSCREEN_2023_BG_StatePct_with_AS_CNMI_GU_VI.gdb' 
+  using driver `OpenFileGDB'
+Simple feature collection with 243021 features and 223 fields
+Geometry type: MULTIPOLYGON
+Dimension:     XY
+Bounding box:  xmin: -19951910 ymin: -1617130 xmax: 16259830 ymax: 11554350
+Projected CRS: WGS 84 / Pseudo-Mercator</code></pre>
+</div>
+</div>
+</section>
+<section id="data-analysis" class="level5">
+<h5 class="anchored" data-anchor-id="data-analysis">Data analysis</h5>
+<section id="wastewater-discharge" class="level6">
+<h6 class="anchored" data-anchor-id="wastewater-discharge">Wastewater Discharge</h6>
+<p>Once we have read in the data successfully, we’ll go ahead and create a map of the wastewater discharge by census block groups. We also want to indicate which census blocks groups are above the 95th percentile of national values for wasterwater discharge. This will be indicated by adding a centroid. In this notebook, the centroids are indicated by a red dot.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter in ejscreen for Los Angeles County</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>lac <span class="ot">&lt;-</span> ejscreen <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(CNTY_NAME <span class="sc">==</span> <span class="st">"Los Angeles County"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#filter for data that does not include an NA value</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>lac_simple_dis <span class="ot">&lt;-</span> lac <span class="sc">%&gt;%</span> <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(P_PWDIS))</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># create centroids for all PWDIS above the 95th percentile</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>lac_centroid_dis95 <span class="ot">&lt;-</span> lac <span class="sc">%&gt;%</span> <span class="co">#pip from lac</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(P_PWDIS) <span class="sc">%&gt;%</span> <span class="co">#select P_PWDIS</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(P_PWDIS <span class="sc">&gt;</span> <span class="dv">95</span>) <span class="sc">%&gt;%</span> <span class="co">#filter for percentiles that are above the 95 percentiles</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_centroid</span>() <span class="co">#create a centroid for those filtered percentiles</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>lac_centroids_dis95_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(lac_centroid_dis95) <span class="sc">+</span> <span class="co">#add the lac_centroid_dis95 data on top of first map</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_dots</span>(<span class="at">fill =</span> <span class="st">"red"</span>) <span class="co">#have them as dots, with color red</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>lac_simple_dis_map <span class="ot">&lt;-</span> <span class="fu">tm_shape</span>(lac_simple_dis) <span class="sc">+</span> <span class="co">#create a map using the lac_simple dataset</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_graticules</span>() <span class="sc">+</span> <span class="co"># add graticules on the map</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_fill</span>(<span class="at">fill =</span> <span class="st">'P_PWDIS'</span>, <span class="co">#have fill be for P_PWDIS column</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">palette =</span> <span class="st">'greens'</span>, <span class="co">#have the palette changed to green</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">title =</span> <span class="st">"Percentiles of Wastewater discharge"</span>) <span class="sc">+</span> <span class="co">#put title on legend</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"arrow"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="co"># add compass on map at the top right of the map</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">45</span>), <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="sc">+</span> <span class="co"># scale bar is on map at the bottom right of the map (cannot move and manipulate)</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="fl">1.5</span>, <span class="co">#change the aspect of the map</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Wasterwater Discharge for Block Groups above 95 Percentile"</span>, <span class="co">#put a title on the map</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>   <span class="fu">tm_credits</span>(<span class="st">"Red dots represent centroids of percentile wastewater discharge above 95"</span>,</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>             <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"LEFT"</span>, <span class="st">"BOTTOM"</span>))<span class="co">#change the font size of title</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">#combine two maps together and print combined maps</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>lac_simple_dis_map <span class="sc">+</span> lac_centroids_dis95_map</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="LA-HOLC-grade-inequality_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Here, we see a map of the Los Angeles County showing the percentiles of wastewater discharge, with least discharge being light green and most discharge being dark green. The figure caption states that Block groups over the 95th percentile.</p>
+</section>
+<section id="low-income-percentage" class="level6">
+<h6 class="anchored" data-anchor-id="low-income-percentage">Low Income Percentage</h6>
+<p>We are also interested in the relationship between census block groups and population income. One relationship we will look into is the percentage of census block group have less than 5% of that group’s population that is considered low income.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#finding low income percent that is less than 5 percent</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>lowincpct_5 <span class="ot">&lt;-</span> lac <span class="sc">%&gt;%</span> <span class="co">#piping from lac</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(LOWINCPCT) <span class="sc">%&gt;%</span> <span class="co">#select LOWINCPCT</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(LOWINCPCT <span class="sc">&lt;</span> <span class="fl">0.05</span>) <span class="co">#filter for LOWINCPCT that is less than 5 percent</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#filtering for just low income percent in a new dataframe</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>lac_lowincpct <span class="ot">&lt;-</span> lac <span class="sc">%&gt;%</span> <span class="co">#piping from lac</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(LOWINCPCT) <span class="co">#select for just LOWINCPCT in a new dataframe</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#divide the number of rows in lowincpct_5 by rows in lac_lowincpct and multiply by 100</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>low_income_final <span class="ot">&lt;-</span> (<span class="fu">nrow</span>(lowincpct_5) <span class="sc">/</span> <span class="fu">nrow</span>(lac_lowincpct)) <span class="sc">*</span><span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here we get a percentage of about 6.11. One conclusion from this number is showing that there are many more census blocks that have a higher percentage of low income population. We can assume that there are a higher percentage of low income individuals that live in the Los Angeles County. Let’s go ahead and look more into the data to see if these low income population are more likely to be found in a lower HOLC rank.</p>
+</section>
+<section id="particulate-matter-and-superfund-proximity" class="level6">
+<h6 class="anchored" data-anchor-id="particulate-matter-and-superfund-proximity">Particulate Matter and Superfund proximity</h6>
+<p>We looked at low income percentage in different census block groups. Now let’s look at the relationship between census block groups and the Particulate Matter as well as the Superfund proximity. We’ll go ahead and look at which census block groups are above the 80th percentile for both of these.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filtering for particulate matter 2.5 and superfund proximity for above 80 percentile</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>lac_pm25_super_80 <span class="ot">&lt;-</span> lac <span class="sc">%&gt;%</span> <span class="co">#piping from lac</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(P_PM25 <span class="sc">&gt;</span> <span class="dv">80</span> <span class="sc">&amp;</span> P_PNPL <span class="sc">&gt;</span> <span class="dv">80</span>) <span class="co">#filter from P_PM25 and P_PNPL for above the 80 percentile</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#divide number of rows in lac_pm25_super_80 by number of rows in lac</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>pm25_super_final <span class="ot">&lt;-</span> <span class="fu">nrow</span>(lac_pm25_super_80) <span class="sc">/</span> <span class="fu">nrow</span>(lac) <span class="sc">*</span> <span class="dv">100</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>From this, we can conclude that about 17.36 percent of census block groups live in areas that are in the 80th percentile for high PM 2.5 levels and in superfund proximity.</p>
+</section>
+</section>
+<section id="import-redlining-data-for-los-angeles" class="level5">
+<h5 class="anchored" data-anchor-id="import-redlining-data-for-los-angeles">Import redlining data for Los Angeles</h5>
+<p>Now we’re going to go ahead and read in the redlining data for Los Angeles county. Fortunately in this case, we can do ahead and read it in through the URL.</p>
+<section id="creating-la-county-map-with-holc-grade-on-top" class="level6">
+<h6 class="anchored" data-anchor-id="creating-la-county-map-with-holc-grade-on-top">Creating LA county map with HOLC grade on top</h6>
+<p>Now we want to visualize the redlining boundaries. Let’s go ahead and do that by plotting a map of where these boundaries lie on Los Angeles County.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#print map that includes the historical redlining boundaries</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tm_shape</span>(LA_redlining) <span class="sc">+</span> <span class="co">#load LA_redlining data</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_graticules</span>() <span class="sc">+</span> <span class="co">#print on gradicules on map</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">fill =</span> <span class="st">"holc_grade"</span>, <span class="co">#have the fill on holc_grade column</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">palette =</span> <span class="fu">c</span>(<span class="st">"green"</span>, <span class="st">"blue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span>), <span class="co">#change the palette to fit original holc grade color scheme</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">breaks =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>)) <span class="sc">+</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_shape</span>(lac) <span class="sc">+</span> <span class="co">#load lac data</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_polygons</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="co">#have transparancy be at 0.5</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">lwd =</span> <span class="fl">0.1</span>) <span class="sc">+</span> <span class="co">#have line width at 0.1</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tm_compass</span>(<span class="at">type =</span> <span class="st">"arrow"</span>, <span class="at">position =</span> <span class="fu">c</span>(<span class="st">"right"</span>, <span class="st">"top"</span>), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span> <span class="co"># add compass on map at the top right of the map</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_scale_bar</span>(<span class="at">position =</span> <span class="fu">c</span>(<span class="st">"left"</span>, <span class="st">"bottom"</span>)) <span class="sc">+</span> <span class="co"># scale bar is on map at the bottom right of the map (cannot move and manipulate)</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tm_layout</span>(<span class="at">asp =</span> <span class="fl">1.3</span>, <span class="co">#change the aspect of the map</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">title =</span> <span class="st">"Los Angeles HOLC Grades on top of Los Angeles County"</span>, <span class="co">#put a title on the map</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">title.size =</span> <span class="dv">1</span>) <span class="co">#change the font size of title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="LA-HOLC-grade-inequality_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>This map shows us the locations of where each HOLC grade lies in relation to Los Angeles county.</p>
+</section>
+<section id="census-block-groups-in-holc-grade" class="level6">
+<h6 class="anchored" data-anchor-id="census-block-groups-in-holc-grade">Census block groups in HOLC grade</h6>
+<p>In order to get a concrete detail about this, we’re going to ahead and find how many census block groups that fall within areas with HOLC grades.</p>
+<p>This tells us that 3951 of census block groups lie within HOLC grade areas</p>
+</section>
+<section id="summarizing-redlining-data" class="level6">
+<h6 class="anchored" data-anchor-id="summarizing-redlining-data">Summarizing Redlining data</h6>
+<p>Let’s go ahead and take a deeper dive into our HOLC dataset and look for the mean of the following variables:</p>
+<ul>
+<li>% low income.</li>
+<li>percentile for particulate Matter 2.5.</li>
+<li>percentile for low life expectancy.</li>
+<li>percentile for air toxics cancer risk</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#join the two datasets by only filtering for the census block group that are completely within the HOLC grades</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>redlining_lac_join <span class="ot">&lt;-</span> <span class="fu">st_intersection</span>(lac, LA_redlining_crs_t)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#find the means of the four variables we are looking for</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>redlining_mean_summary <span class="ot">&lt;-</span> redlining_lac_join <span class="sc">%&gt;%</span> <span class="co">#piping from redlining_lac_join</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(holc_grade) <span class="sc">%&gt;%</span> <span class="co"># grouping by holc_grade</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">low_income_mean =</span> <span class="fu">mean</span>(LOWINCPCT, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="co">#find the mean of LOWINCPCT</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">pm25_mean =</span> <span class="fu">mean</span>(P_PM25, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co">#find the mean of P_PM25</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">low_lifeexp_mean =</span> <span class="fu">mean</span>(P_LIFEEXPPCT, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="co">#find the mean of P_LIFEEXPPCT</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">cancer_mean =</span> <span class="fu">mean</span>(P_CANCER, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span> <span class="co">#find the mean of P_CANCER</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_drop_geometry</span>() <span class="sc">%&gt;%</span> <span class="co">#get rid of geometry column</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="co">#use gt function to get nicer table</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#print summary with means of variables we are interested in</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>redlining_mean_summary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<div id="qvffirqppc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qvffirqppc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qvffirqppc thead, #qvffirqppc tbody, #qvffirqppc tfoot, #qvffirqppc tr, #qvffirqppc td, #qvffirqppc th {
+  border-style: none;
+}
+
+#qvffirqppc p {
+  margin: 0;
+  padding: 0;
+}
+
+#qvffirqppc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qvffirqppc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qvffirqppc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qvffirqppc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qvffirqppc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qvffirqppc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qvffirqppc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qvffirqppc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qvffirqppc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qvffirqppc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qvffirqppc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qvffirqppc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qvffirqppc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qvffirqppc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qvffirqppc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qvffirqppc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qvffirqppc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qvffirqppc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qvffirqppc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qvffirqppc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qvffirqppc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qvffirqppc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qvffirqppc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qvffirqppc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qvffirqppc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qvffirqppc .gt_left {
+  text-align: left;
+}
+
+#qvffirqppc .gt_center {
+  text-align: center;
+}
+
+#qvffirqppc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qvffirqppc .gt_font_normal {
+  font-weight: normal;
+}
+
+#qvffirqppc .gt_font_bold {
+  font-weight: bold;
+}
+
+#qvffirqppc .gt_font_italic {
+  font-style: italic;
+}
+
+#qvffirqppc .gt_super {
+  font-size: 65%;
+}
+
+#qvffirqppc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qvffirqppc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qvffirqppc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qvffirqppc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qvffirqppc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qvffirqppc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qvffirqppc .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="holc_grade">holc_grade</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="low_income_mean">low_income_mean</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pm25_mean">pm25_mean</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="low_lifeexp_mean">low_lifeexp_mean</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="cancer_mean">cancer_mean</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="holc_grade" class="gt_row gt_left">A</td>
+<td headers="low_income_mean" class="gt_row gt_right">14.94183</td>
+<td headers="pm25_mean" class="gt_row gt_right">72.14222</td>
+<td headers="low_lifeexp_mean" class="gt_row gt_right">23.73502</td>
+<td headers="cancer_mean" class="gt_row gt_right">44.00223</td></tr>
+    <tr><td headers="holc_grade" class="gt_row gt_left">B</td>
+<td headers="low_income_mean" class="gt_row gt_right">24.19799</td>
+<td headers="pm25_mean" class="gt_row gt_right">76.33145</td>
+<td headers="low_lifeexp_mean" class="gt_row gt_right">37.37701</td>
+<td headers="cancer_mean" class="gt_row gt_right">47.69579</td></tr>
+    <tr><td headers="holc_grade" class="gt_row gt_left">C</td>
+<td headers="low_income_mean" class="gt_row gt_right">34.09575</td>
+<td headers="pm25_mean" class="gt_row gt_right">78.81780</td>
+<td headers="low_lifeexp_mean" class="gt_row gt_right">47.88598</td>
+<td headers="cancer_mean" class="gt_row gt_right">54.55879</td></tr>
+    <tr><td headers="holc_grade" class="gt_row gt_left">D</td>
+<td headers="low_income_mean" class="gt_row gt_right">39.15954</td>
+<td headers="pm25_mean" class="gt_row gt_right">80.23254</td>
+<td headers="low_lifeexp_mean" class="gt_row gt_right">53.05932</td>
+<td headers="cancer_mean" class="gt_row gt_right">56.53943</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+</div>
+<p>From our analysis, those in the A HOLC grade have a better standard of living than those in the D HOLC grade. Those that are in the A HOLC grade have a larger income pool, meaning they have access to better health care and live in a cleaner area verses those that have lower income.</p>
+</section>
+</section>
+</section>
+<section id="investigate-the-legacy-of-redlining-in-biodiversity-observations" class="level3">
+<h3 class="anchored" data-anchor-id="investigate-the-legacy-of-redlining-in-biodiversity-observations">Investigate the legacy of redlining in biodiversity observations</h3>
+<p>Now, let’s look at the data from a bit of a different lens. One factor that income plays in one’s life is what recreations they can do. Let’s go ahead and look at bird observations in each HOLC grade. Let’s go ahead and look at bird observations from 2022. We’re also going to find the percentage of observations within each redlining category and plot them in a bar graph.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#read in bird data</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>birds <span class="ot">&lt;-</span> <span class="fu">st_read</span>(<span class="st">"../data/gbif-birds-LA"</span>) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2022</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Reading layer `gbif-birds-LA' from data source 
+  `/Users/p_park/eds_223/final-project/LA-HOLC-grade-inequality/data/gbif-birds-LA' 
+  using driver `ESRI Shapefile'
+Simple feature collection with 1288865 features and 1 field
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -118.6099 ymin: 33.70563 xmax: -117.7028 ymax: 34.30385
+Geodetic CRS:  WGS 84</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#check the crs for LA_redlining</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">st_crs</span>(LA_redlining) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Coordinate Reference System:
+  User input: WGS 84 
+  wkt:
+GEOGCRS["WGS 84",
+    DATUM["World Geodetic System 1984",
+        ELLIPSOID["WGS 84",6378137,298.257223563,
+            LENGTHUNIT["metre",1]]],
+    PRIMEM["Greenwich",0,
+        ANGLEUNIT["degree",0.0174532925199433]],
+    CS[ellipsoidal,2],
+        AXIS["geodetic latitude (Lat)",north,
+            ORDER[1],
+            ANGLEUNIT["degree",0.0174532925199433]],
+        AXIS["geodetic longitude (Lon)",east,
+            ORDER[2],
+            ANGLEUNIT["degree",0.0174532925199433]],
+    ID["EPSG",4326]]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#transform crs and join dataframes</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>birds_crs_t <span class="ot">&lt;-</span> <span class="fu">st_transform</span>(birds, <span class="at">crs =</span> <span class="fu">st_crs</span>(<span class="dv">4326</span>)) <span class="co">#transform birds dataframe crs to LA_redlining crs</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>redlining_birds_join <span class="ot">&lt;-</span> <span class="fu">st_join</span>(LA_redlining, birds_crs_t) <span class="co">#join both LA_redlining and new bird dataframe to get joined dataframe</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>redlining_bird_summary <span class="ot">&lt;-</span> redlining_birds_join <span class="sc">%&gt;%</span> <span class="co">#piping from redlining_birds_join</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(holc_grade) <span class="sc">%&gt;%</span> <span class="co">#group by holc grade</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="at">percentage =</span> <span class="fu">n</span>()<span class="sc">/</span><span class="fu">nrow</span>(redlining_birds_join)) <span class="co">#create a summary table by dividing each holc grade by the total rows in redlining_birds_join</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#plot as bargraph</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> redlining_bird_summary, <span class="co">#use redlining_bird_summary data</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> holc_grade, <span class="co">#have holc_grade be on x axis</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>           <span class="at">y =</span> percentage)) <span class="sc">+</span> <span class="co">#have percentage be on y axis</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="co">#telling ggplot I want to aggregate manually</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>           <span class="fu">aes</span>(<span class="at">fill =</span> holc_grade)) <span class="sc">+</span> <span class="co">#have fill be holc_grade</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">"lightgreen"</span>, <span class="st">"lightskyblue"</span>, <span class="st">"yellow"</span>, <span class="st">"red"</span>))<span class="sc">+</span> <span class="co">#change color manually</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"HOLC Grade"</span>, <span class="co">#change x label</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">"Percentage (in decimal form)"</span>, <span class="co">#change y label</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"Percentage of bird sighting by HOLC Grade"</span>) <span class="co">#change title</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="LA-HOLC-grade-inequality_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p><strong>Final Analysis</strong> I am surprised with the results I plotted, as HOLC Grade C and D have a higher percentage of bird sighting verses those in HOLC Grade A and B. I would have assumed the graph to have more bird sightings in HOLC Grade A and B rather than C and D. This could be that there are more resources found in C and D, such as humans throwing their trash away at the side of the street verses in a trash can. These birds would rather be around an area with constant food resources, which could be found in the C and D communities.</p>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Gee, G. C. (2008). A multilevel analysis of the relationship between institutional and individual racial discrimination and health status. American journal of public health, 98(Supplement_1), S48-S56.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Nardone, A., Rudolph, K. E., Morello-Frosch, R., &amp; Casey, J. A. (2021). Redlines and greenspace: the relationship between historical redlining and 2010 greenspace across the United States. Environmental health perspectives, 129(1), 017006.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Hoffman, J. S., Shandas, V., &amp; Pendleton, N. (2020). The effects of historical housing policies on resident exposure to intra-urban heat: a study of 108 US urban areas. Climate, 8(1), 12.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Ellis-Soto, D., Chapman, M., &amp; Locke, D. H. (2023). Historical redlining is associated with increasing geographical disparities in bird biodiversity sampling in the United States. Nature Human Behaviour, 1-9.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Robert K. Nelson, LaDale Winling, Richard Marciano, Nathan Connolly, et al., “Mapping Inequality,” American Panorama, ed.&nbsp;Robert K. Nelson and Edward L. Ayers, accessed October 17, 2023, <a href="https://dsl.richmond.edu/panorama/redlining/" class="uri">https://dsl.richmond.edu/panorama/redlining/</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
