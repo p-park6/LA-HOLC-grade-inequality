@@ -41,5 +41,4 @@ Data can be accessed [here](https://drive.google.com/file/d/1lcazRbNSmP8Vj9sH1AI
 
 
 
-
 [^1]: Michell, B., & Franco, J. (2018, March 20). HOLC “redlining” maps: The persistent structure of segregation and economic inequality. https://ncrc.org/holc/
