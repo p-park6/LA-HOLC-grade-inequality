@@ -27,7 +27,7 @@ Data can be accessed [here](https://drive.google.com/file/d/1lcazRbNSmP8Vj9sH1AI
 │   ├── LA-HOLC-grade-inequality.html
 │   ├── LA-HOLC-grade-inequality.qmd
 │   └── LA-HOLC-grade-inequality_files
-│       ├── figure-html
+│       └── figure-html
 │          ├── unnamed-chunk-10-1.png
 │          ├── unnamed-chunk-3-1.png
 │          └── unnamed-chunk-7-1.png
