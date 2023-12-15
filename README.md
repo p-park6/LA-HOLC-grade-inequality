@@ -4,7 +4,7 @@ This repository covers the Home Owners' Loan Corporation (HOLC) that was created
 
 ## What this notebook covers
 -  Creating maps from the `tmap` package
--  Analysis of the dataset by finding percentages and amounts
+-  Analysis of the dataset by finding percentages and amounts relating to redlining communities
 -  Creating a bar graph to visualize results
 
 
